@@ -1,0 +1,327 @@
+{
+  "source": "",
+  "blender": "5.1.2",
+  "scene": "Scene",
+  "collections": [
+    "Collection"
+  ],
+  "objects": {
+    "MESH": 7,
+    "CAMERA": 1,
+    "EMPTY": 2,
+    "LIGHT": 1
+  },
+  "armatures": [],
+  "meshes": [
+    {
+      "name": "arm-left",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 24,
+      "polygons": 12,
+      "parent": "torso",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    },
+    {
+      "name": "arm-right",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 24,
+      "polygons": 12,
+      "parent": "torso",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    },
+    {
+      "name": "Cube",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 8,
+      "polygons": 6,
+      "parent": null,
+      "modifiers": [],
+      "materials": [
+        "Material"
+      ]
+    },
+    {
+      "name": "head",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 23,
+      "polygons": 12,
+      "parent": "torso",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    },
+    {
+      "name": "leg-left",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 24,
+      "polygons": 12,
+      "parent": "root",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    },
+    {
+      "name": "leg-right",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 24,
+      "polygons": 12,
+      "parent": "root",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    },
+    {
+      "name": "torso",
+      "visible": true,
+      "hide_viewport": false,
+      "hide_render": false,
+      "vertices": 24,
+      "polygons": 12,
+      "parent": "root",
+      "modifiers": [],
+      "materials": [
+        "texture-a"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "attack-kick-left",
+      "frame_range": [
+        0.0,
+        14.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "attack-kick-right",
+      "frame_range": [
+        0.0,
+        14.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "attack-melee-left",
+      "frame_range": [
+        0.0,
+        10.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "attack-melee-right",
+      "frame_range": [
+        0.0,
+        10.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "die",
+      "frame_range": [
+        0.0,
+        8.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "drive",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 5
+    },
+    {
+      "name": "emote-no",
+      "frame_range": [
+        0.0,
+        16.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "emote-yes",
+      "frame_range": [
+        0.0,
+        16.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "holding-both",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 2
+    },
+    {
+      "name": "holding-both-shoot",
+      "frame_range": [
+        0.0,
+        4.800000190734863
+      ],
+      "slots": 4
+    },
+    {
+      "name": "holding-left",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 1
+    },
+    {
+      "name": "holding-left-shoot",
+      "frame_range": [
+        0.0,
+        4.800000190734863
+      ],
+      "slots": 3
+    },
+    {
+      "name": "holding-right",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 1
+    },
+    {
+      "name": "holding-right-shoot",
+      "frame_range": [
+        0.0,
+        4.800000190734863
+      ],
+      "slots": 3
+    },
+    {
+      "name": "idle",
+      "frame_range": [
+        0.0,
+        32.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "interact-left",
+      "frame_range": [
+        0.0,
+        16.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "interact-right",
+      "frame_range": [
+        0.0,
+        16.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "pick-up",
+      "frame_range": [
+        0.0,
+        8.0
+      ],
+      "slots": 4
+    },
+    {
+      "name": "sit",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 3
+    },
+    {
+      "name": "sprint",
+      "frame_range": [
+        0.0,
+        12.0
+      ],
+      "slots": 7
+    },
+    {
+      "name": "static",
+      "frame_range": [
+        0.0,
+        2.4000000953674316
+      ],
+      "slots": 7
+    },
+    {
+      "name": "walk",
+      "frame_range": [
+        0.0,
+        16.0
+      ],
+      "slots": 6
+    },
+    {
+      "name": "wheelchair-move-back",
+      "frame_range": [
+        0.0,
+        12.0
+      ],
+      "slots": 6
+    },
+    {
+      "name": "wheelchair-move-forward",
+      "frame_range": [
+        0.0,
+        12.0
+      ],
+      "slots": 6
+    },
+    {
+      "name": "wheelchair-move-left",
+      "frame_range": [
+        0.0,
+        12.0
+      ],
+      "slots": 6
+    },
+    {
+      "name": "wheelchair-move-right",
+      "frame_range": [
+        0.0,
+        12.0
+      ],
+      "slots": 6
+    },
+    {
+      "name": "wheelchair-sit",
+      "frame_range": [
+        0.0,
+        4.0
+      ],
+      "slots": 4
+    }
+  ],
+  "texts": []
+}

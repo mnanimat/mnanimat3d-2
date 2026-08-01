@@ -1,0 +1,234 @@
+:root{--v3bar:42px;--v3panel:330px;--v3bg:#101322;--v3line:#2c324a;--v3text:#eef0ff;--v3muted:#9ea6c2;--v3accent:#8f72ff}
+.mnanimat-v3 body{overflow:hidden}
+.v3-workspace-bar{position:fixed;z-index:130;left:0;right:0;top:44px;height:var(--v3bar);display:flex;align-items:center;justify-content:center;gap:4px;padding:0 10px;background:rgba(10,12,23,.97);border-bottom:1px solid var(--v3line);box-shadow:0 5px 20px rgba(0,0,0,.2);overflow-x:auto;scrollbar-width:none}
+.v3-workspace-bar::-webkit-scrollbar{display:none}
+.v3-workspace-bar button{flex:0 0 auto;border:0;background:transparent;color:#aab1ca;padding:8px 13px;border-radius:8px;font:600 12px/1 Segoe UI,sans-serif;cursor:pointer;transition:.15s}
+.v3-workspace-bar button:hover{color:#fff;background:#1b2033}.v3-workspace-bar button.active{color:#fff;background:linear-gradient(135deg,#6e55d8,#845fff);box-shadow:0 4px 16px rgba(106,79,220,.34)}
+.mnanimat-v3 .left-panel,.mnanimat-v3 .right-panel,.mnanimat-v3 .workspace{margin-top:var(--v3bar)}
+.v3-workspace-panel{position:fixed;z-index:125;top:calc(44px + var(--v3bar));bottom:0;left:0;width:var(--v3panel);background:rgba(15,18,32,.985);border-right:1px solid var(--v3line);box-shadow:12px 0 35px rgba(0,0,0,.28);transform:translateX(-102%);transition:transform .2s ease;display:flex;flex-direction:column;color:var(--v3text)}
+.v3-workspace-panel.open{transform:translateX(0)}
+.v3-workspace-panel>header{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--v3line);background:#12162a}
+.v3-workspace-panel>header strong{font-size:13px;letter-spacing:.02em}.v3-workspace-panel>header button{border:0;background:#242a42;color:#dbe0f5;border-radius:7px;width:30px;height:30px;font-size:20px;cursor:pointer}
+.v3-pages{overflow:auto;padding:13px 13px 80px}.v3-page{display:none}.v3-page.active{display:block}.v3-page h2{font-size:17px;margin:2px 0 6px}.v3-page h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#b8bfd7;margin:18px 0 8px}.v3-page>p{font-size:12px;line-height:1.5;color:var(--v3muted);margin:0 0 13px}
+.v3-grid{display:grid;gap:7px;margin:8px 0}.v3-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.v3-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-grid button,.v3-page button{min-height:38px;border:1px solid #343b57;background:#1a1f32;color:#e7eaff;border-radius:8px;padding:7px 8px;font:600 11px/1.25 Segoe UI,sans-serif;cursor:pointer}.v3-page button:hover,.v3-page button.active{background:#2a3150;border-color:#7660d9}.v3-page button:disabled{opacity:.55;cursor:wait}
+.v3-segment{display:flex;padding:3px;background:#0b0e1a;border:1px solid #2a3047;border-radius:9px;margin:9px 0}.v3-segment button{flex:1;min-height:30px;border:0;background:transparent;padding:6px 4px}.v3-segment button.active{background:#6f58d8;color:#fff}
+.v3-control{display:grid;gap:5px;color:#adb5d0;font-size:11px;margin:11px 0}.v3-control input[type=range]{width:100%;accent-color:#8d6cff}.v3-control input[type=color]{width:100%;height:35px;background:#151a2d;border:1px solid #353b56;border-radius:7px}.v3-control select,.v3-grid input[type=number]{width:100%;box-sizing:border-box;background:#111527;border:1px solid #353b56;color:#e9ebff;border-radius:7px;padding:8px}
+.v3-check{display:flex!important;align-items:center;gap:7px;color:#c7cde2;font-size:11px;margin:10px 0}.v3-check input{accent-color:#8d6cff}
+.v3-brushes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.v3-brushes button{min-height:34px}
+.v3-info,.v3-warning{border:1px solid #303752;background:#15192a;border-radius:9px;padding:10px;margin:12px 0;display:grid;gap:4px}.v3-info strong{font-size:11px;color:#e8eaff}.v3-info span,.v3-warning{font-size:10px;line-height:1.45;color:#aeb6cf}.v3-warning{border-color:#5c4630;background:#241c17;color:#e2bd91}
+.v3-material-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.v3-material-card{display:grid!important;justify-items:center;gap:5px;min-height:68px!important}.v3-material-card i{display:block;width:30px;height:30px;border-radius:50%;background:var(--swatch);box-shadow:inset 7px 7px 13px rgba(255,255,255,.15),inset -7px -7px 12px rgba(0,0,0,.25)}.v3-material-card span{font-size:10px}
+.v3-list{display:grid;gap:5px;margin-top:10px}.v3-list button{display:flex;justify-content:space-between;align-items:center}.v3-list button small{color:#8f97b3}.v3-list p{font-size:11px;color:#929ab6;text-align:center}
+.v3-character-card{border:1px solid #343b57;background:#171c2e;border-radius:10px;padding:10px;margin:8px 0}.v3-character-card>div{display:flex;align-items:center;gap:9px;margin-bottom:8px}.v3-character-card b{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#d78b35,#8f5bdf);font-size:12px}.v3-character-card span{display:grid;gap:2px}.v3-character-card strong{font-size:11px}.v3-character-card small{font-size:9px;color:#a8b0c9}.v3-character-card button{width:100%}
+.v3-color{display:grid;gap:5px;color:#aeb6ce;font-size:10px}.v3-color input{width:100%;height:38px;background:#151a2d;border:1px solid #353b56;border-radius:7px;padding:2px}
+html[data-v3-workspace="model"] .left-panel,html[data-v3-workspace="sculpt"] .left-panel,html[data-v3-workspace="animation"] .left-panel,html[data-v3-workspace="materials"] .left-panel,html[data-v3-workspace="camera"] .left-panel,html[data-v3-workspace="characters"] .left-panel{visibility:hidden;pointer-events:none}
+html[data-v3-workspace="scene"] .v3-workspace-panel:not(.open){display:none}
+@media (min-width:900px){html[data-v3-workspace]:not([data-v3-workspace="scene"]) .v3-workspace-panel{transform:translateX(0)}html[data-v3-workspace]:not([data-v3-workspace="scene"]) .workspace{margin-left:var(--v3panel)}html[data-v3-workspace]:not([data-v3-workspace="scene"]) .timeline-panel{left:var(--v3panel)}html[data-v3-workspace="scene"] .v3-workspace-panel{transform:translateX(-102%)}}
+@media (max-width:899px){:root{--v3bar:40px}.v3-workspace-bar{top:44px;justify-content:flex-start;padding-left:5px}.v3-workspace-bar button{padding:8px 10px;font-size:11px}.v3-workspace-panel{top:auto;left:4px;right:4px;bottom:54px;width:auto;height:min(64vh,560px);border:1px solid #353b57;border-radius:14px 14px 0 0;transform:translateY(105%)}.v3-workspace-panel.open{transform:translateY(0)}.v3-pages{padding-bottom:30px}.v3-grid.three{grid-template-columns:repeat(2,1fr)}.v3-material-grid{grid-template-columns:repeat(4,1fr)}.mnanimat-v3 .left-panel,.mnanimat-v3 .right-panel,.mnanimat-v3 .workspace{margin-top:var(--v3bar)}html[data-v3-workspace]:not([data-v3-workspace="scene"]) .left-panel{visibility:visible;pointer-events:auto}}
+@media (max-width:560px){.v3-material-grid{grid-template-columns:repeat(3,1fr)}.v3-workspace-bar button{font-size:10px;padding:8px 8px}.v3-page h2{font-size:15px}}
+
+.v32-version{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:5px;background:#6f58d8;color:#fff;font-style:normal;font-size:9px;vertical-align:1px}
+.v3-controller-status{margin:7px 0;padding:8px;border:1px solid #343b57;border-radius:8px;background:#111527;color:#c7cde2;font-size:10px}
+.v3-control input[type=search]{width:100%;box-sizing:border-box;background:#111527;border:1px solid #353b56;color:#e9ebff;border-radius:7px;padding:9px;outline:none}
+.v3-control input[type=search]:focus{border-color:#8068e7}
+.v3-controller-list{max-height:280px;overflow:auto;padding-right:2px}
+.v3-controller-list button{min-height:34px;text-align:left}
+.v3-controller-list button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v3-controller-list button.active{background:#453887;border-color:#a58eff}
+
+
+/* v3.3 — ocupa corretamente a coluna central sem deixar a coluna antiga duplicada. */
+@media (min-width:900px){
+  html[data-v3-workspace]:not([data-v3-workspace="scene"]) .app-shell{
+    grid-template-columns:var(--v3panel) minmax(0,1fr) var(--panel-right)!important;
+  }
+  html[data-v3-workspace]:not([data-v3-workspace="scene"]) .app-shell.hide-right{
+    grid-template-columns:var(--v3panel) minmax(0,1fr) 0px!important;
+  }
+  html[data-v3-workspace]:not([data-v3-workspace="scene"]) .workspace{
+    margin-left:0!important;
+    min-width:0!important;
+    width:auto!important;
+  }
+  html[data-v3-workspace]:not([data-v3-workspace="scene"]) .timeline-panel{
+    grid-column:2 / 4!important;
+    left:0!important;
+    width:auto!important;
+  }
+  html[data-v3-workspace]:not([data-v3-workspace="scene"]) .left-panel{
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
+.v3-selection-marquee{position:absolute;z-index:120;pointer-events:none;border:1px solid #9b7bff;background:rgba(124,92,255,.16);box-shadow:0 0 0 1px rgba(39,213,255,.25) inset;border-radius:3px}
+.viewport canvas.v3-box-select-active{cursor:crosshair!important}
+.v3-danger{border-color:#7b3546!important;color:#ff9caf!important;background:#2a1720!important}
+.v3-danger:hover{background:#44202d!important;border-color:#ff5b72!important;color:#fff!important}
+.v3-controller-list button{gap:8px}
+.v3-controller-list button small{flex:0 0 auto}
+
+
+/* MNAnimat3D v4.4 — restauração completa das páginas. */
+#v3-workspace-bar.v3-workspace-bar{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  white-space:nowrap!important;
+  justify-content:flex-start!important;
+  scroll-behavior:smooth;
+}
+#v3-workspace-bar [data-v3-workspace]{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  flex:0 0 auto!important;
+  align-items:center;
+  justify-content:center;
+}
+#v3-workspace-panel{
+  display:flex!important;
+}
+#v3-workspace-panel .v3-pages,
+#v3-workspace-panel .v3-page.active{
+  visibility:visible!important;
+  opacity:1!important;
+}
+html[data-v3-workspace="scene"] .left-panel{
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+@media (min-width:1180px){
+  #v3-workspace-bar.v3-workspace-bar{
+    justify-content:center!important;
+  }
+}
+@media (max-width:899px){
+  #v3-workspace-bar.v3-workspace-bar{
+    justify-content:flex-start!important;
+    padding-right:24px!important;
+  }
+}
+
+
+/* v4.6: a barra com todas as páginas deve permanecer visível. */
+#v3-workspace-bar.v3-workspace-bar{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:10000!important;
+  min-width:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+}
+#v3-workspace-bar [data-v3-workspace]{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  flex:0 0 auto!important;
+}
+#v3-workspace-panel{
+  visibility:visible!important;
+  z-index:10001!important;
+}
+
+
+/* MNAnimat3D v1.0.0 — barra das páginas sempre visível. */
+#v3-workspace-bar.v3-workspace-bar {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 10000 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+#v3-workspace-bar [data-v3-workspace] {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 0 auto !important;
+}
+#v3-workspace-panel {
+  visibility: visible !important;
+  z-index: 10001 !important;
+}
+
+/* CAD Floating Geometric Constraint Toolbar */
+.v3-cad-floating-bar,
+#v3-cad-floating-bar {
+  position: absolute !important;
+  bottom: 18px !important;
+  top: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 999 !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.94) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: 30px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15) !important;
+  user-select: none;
+  max-width: 95%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.v3-cad-floating-bar::-webkit-scrollbar {
+  display: none;
+}
+.v3-cad-floating-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.v3-cad-floating-btn:hover {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+}
+.v3-cad-floating-btn:active {
+  transform: scale(0.96);
+}
+
+/* Afastar caixa com botões Reset e Sombreamento para a esquerda do Viewcube */
+.view-toolbar {
+  right: 150px !important;
+  top: 13px !important;
+  z-index: 45 !important;
+}
+
+/* Janelas Flutuantes, Maximizadas e Arrastáveis */
+.v3-panel-maximized {
+  position: fixed !important;
+  left: 10px !important;
+  right: 10px !important;
+  top: 86px !important;
+  bottom: 60px !important;
+  width: auto !important;
+  height: auto !important;
+  z-index: 9999 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+.v3-workspace-panel {
+  resize: both;
+  overflow: hidden;
+}

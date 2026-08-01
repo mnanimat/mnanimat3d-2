@@ -1,0 +1,40 @@
+{
+  "name": "MNAnimat3D",
+  "version": "1.0.0",
+  "build": "windows-all-pages-engine-instance-fix-100",
+  "platform": "Windows",
+  "entryPoint": "src/v3-bootstrap.js?v=100",
+  "completePackage": true,
+  "requiresPreviousInstallation": false,
+  "pages": [
+    "Cena",
+    "Modelagem",
+    "Escultura",
+    "Animação",
+    "Materiais e Luz",
+    "Câmeras",
+    "Personagens"
+  ],
+  "characterTools": {
+    "modelImport": true,
+    "clothingAndMaterials": true,
+    "morphTargets": true,
+    "outfitPresets": true,
+    "poseLibraryPerRig": true
+  },
+  "optionalPackages": {
+    "UAL2": "Importação manual no aplicativo",
+    "Downtown City": "Importação manual no aplicativo"
+  },
+  "licenses": {
+    "Furniture Kit and Blocky": "Kenney CC0",
+    "UAL1": "Quaternius CC0",
+    "fflate": "MIT",
+    "Blender": "Programa externo GNU GPL; não incorporado"
+  },
+  "requiredFrontend": "1.0.0",
+  "engineModule": "src/engine.js?v=100",
+  "engineInstanceRegisteredImmediately": true,
+  "referenceInstaller": "MNAnimat3D-v3.3.2-Setup(1).exe",
+  "referenceInstallerSHA256": "230e278f2b83ecb921dad0d7b3558e0356af9a4b6641aad52f5dde3b7ec5f931"
+}

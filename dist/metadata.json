@@ -1,0 +1,8 @@
+{
+  "name": "MNAnimat3D Studio",
+  "description": "3D modeling, rigging, scenes and animation studio",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "MNAnimat3D Studio",
+  "short_name": "MNAnimat3D",
+  "description": "MNAnimat3D — modelagem, rig, cenários e animação 3D",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090b16",
+  "theme_color": "#090b16",
+  "icons": [
+    {
+      "src": "./src/assets/images/regenerated_image_1785379781651.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./src/assets/images/regenerated_image_1785379781651.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

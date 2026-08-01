@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b16" />
+  <meta name="description" content="MNAnimat3D — modelagem, rig, cenários e animação 3D para Windows e Android." />
+  <title>MNAnimat3D</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link id="mn-favicon" rel="icon" href="./src/assets/images/regenerated_image_1785379781651.png" type="image/png" />
+  <link rel="shortcut icon" href="./src/assets/images/regenerated_image_1785379781651.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./src/assets/images/regenerated_image_1785379781651.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./src/features-v2.css?v=460" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./lib/three/three.module.js",
+        "three/addons/": "./lib/three/addons/"
+      }
+    }
+  </script>
+  
+  <link id="mn-features-v3-css" rel="stylesheet" href="./src/features-v3.css?v=100" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="MNAnimat3D">
+        <img id="brand-logo-img" class="brand-logo" src="./src/assets/images/regenerated_image_1785379781651.png" alt="MNAnimat3D Logo" />
+        <span class="brand-copy"><strong>MNAnimat3D</strong><small>STUDIO</small></span>
+      </div>
+
+      <nav class="main-menu" aria-label="Menu principal">
+        <button class="menu-button" data-menu="file">Arquivo</button>
+        <button class="menu-button open-ui-config-action" id="open-ui-config-btn" style="color:#38bdf8;font-weight:600;" title="Configurações do Layout e Preferências">⚙️ Configurações</button>
+        <button class="menu-button" id="open-windows-menu-btn" style="color:#a855f7;font-weight:700;" title="Gerenciar e Reabrir Janelas do Programa">🪟 Janelas</button>
+        <button class="menu-button" data-menu="edit">Editar</button>
+        <button class="menu-button" data-menu="create">Criar</button>
+        <button class="menu-button" data-menu="animate">Animar</button>
+        <button class="menu-button open-legal-action" id="open-legal-btn" style="color:#34d399;font-weight:600;" title="Termos de Uso e Licença MIT">⚖️ Termos e Licença</button>
+        <button class="menu-button open-login-action" id="edit-profile-btn" style="color:#38bdf8;font-weight:700;background:rgba(2,132,199,0.18);border:1px solid #38bdf8;border-radius:6px;padding:0 10px;margin-left:4px;cursor:pointer;" title="Editar seu Login e Perfil de Usuário">👤 Editar Login</button>
+      </nav>
+
+      <div class="top-actions">
+        <span id="save-status" class="save-status open-login-action" style="cursor:pointer;" title="Clique para ver ou editar seu login e perfil local"><i></i> Projeto local</span>
+        <button id="theme-toggle-btn" class="icon-button" title="Alternar tom Claro / Escuro" aria-label="Alternar tom"><span data-icon="sun"></span></button>
+        <button id="undo-btn" class="icon-button" title="Desfazer (Ctrl+Z)" aria-label="Desfazer"></button>
+        <button id="redo-btn" class="icon-button" title="Refazer (Ctrl+Y)" aria-label="Refazer"></button>
+        <button id="render-btn" class="primary-button"><span class="button-icon" data-icon="sparkles"></span>Renderizar</button>
+      </div>
+    </header>
+
+    <aside class="left-panel panel">
+      <div class="panel-tabs" role="tablist">
+        <button class="panel-tab active" data-tab="create-panel">Criar</button>
+        <button class="panel-tab" data-tab="scene-panel">Cena</button>
+        <button class="panel-tab" data-tab="assets-panel">Assets</button>
+      </div>
+
+      <section id="create-panel" class="panel-content active">
+        <div class="section-heading"><span>Formas básicas</span><small>Arraste e edite</small></div>
+        <div class="primitive-grid">
+          <button class="asset-card" data-add="box"><span class="shape-icon cube"></span><span>Cubo</span><kbd>1</kbd></button>
+          <button class="asset-card" data-add="sphere"><span class="shape-icon sphere"></span><span>Esfera</span><kbd>2</kbd></button>
+          <button class="asset-card" data-add="cylinder"><span class="shape-icon cylinder"></span><span>Cilindro</span><kbd>3</kbd></button>
+          <button class="asset-card" data-add="plane"><span class="shape-icon plane"></span><span>Plano</span><kbd>4</kbd></button>
+          <button class="asset-card" data-add="cone"><span class="shape-icon cone"></span><span>Cone</span><kbd>5</kbd></button>
+          <button class="asset-card" data-add="torus"><span class="shape-icon torus"></span><span>Toro</span><kbd>6</kbd></button>
+          <button class="asset-card" data-add="line"><span class="shape-icon line"></span><span>Reta</span></button>
+          <button class="asset-card" data-add="arc"><span class="shape-icon arc"></span><span>Arco</span></button>
+          <button class="asset-card" data-add="ring"><span class="shape-icon ring"></span><span>Anel</span></button>
+          <button class="asset-card" data-add="capsule"><span class="shape-icon capsule"></span><span>Cápsula</span></button>
+          <button class="asset-card" data-add="pyramid"><span class="shape-icon pyramid"></span><span>Pirâmide</span></button>
+          <button class="asset-card" data-add="tube"><span class="shape-icon tube"></span><span>Tubo</span></button>
+        </div>
+
+        <div class="section-heading spaced"><span>Personagem e efeitos</span><small>Prontos para animar</small></div>
+        <div class="feature-list">
+          <button class="feature-card" id="add-rig-btn">
+            <span class="feature-icon violet" data-icon="person"></span>
+            <span><strong>Ator articulado</strong><small>18 controles de pose</small></span>
+            <span class="add-badge">+</span>
+          </button>
+          <button class="feature-card" data-weather="rain">
+            <span class="feature-icon cyan" data-icon="rain"></span>
+            <span><strong>Chuva procedural</strong><small>Partículas em tempo real</small></span>
+            <span class="add-badge">+</span>
+          </button>
+          <button class="feature-card" data-weather="snow">
+            <span class="feature-icon pink" data-icon="snow"></span>
+            <span><strong>Neve procedural</strong><small>Queda e turbulência</small></span>
+            <span class="add-badge">+</span>
+          </button>
+        </div>
+
+        <div class="section-heading spaced"><span>Música & Efeito Sonoro</span><small>Sincronizado com a cena</small></div>
+        <div class="feature-list">
+          <button class="feature-card" id="import-audio-btn">
+            <span class="feature-icon violet" data-icon="audio"></span>
+            <span><strong>Importar áudio ou música</strong><small>MP3, WAV, OGG, M4A, AAC</small></span>
+            <span class="add-badge">+</span>
+          </button>
+          <input id="audio-file-input" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" hidden />
+        </div>
+        <div id="audio-tracks-list" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;"></div>
+      </section>
+
+      <section id="scene-panel" class="panel-content">
+        <div class="search-box"><span data-icon="search"></span><input id="scene-search" type="search" placeholder="Buscar na cena" /></div>
+        <div id="scene-tree" class="scene-tree" aria-label="Hierarquia da cena"></div>
+      </section>
+
+      <section id="assets-panel" class="panel-content">
+        <div class="section-heading"><span>Personagens Incluídas & Rigs</span><small>CC0 1.0 Universal</small></div>
+        <div class="character-library">
+          <article class="character-card blocky-card" style="border:1px solid #334155;background:linear-gradient(145deg,#0f172a,#090d16);border-radius:12px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <div class="character-portrait" style="height:54px;"><span>MN</span><i>CC0</i></div>
+            <div class="character-info">
+              <div><strong style="color:#f8fafc;font-size:13px;">Personagem blocada</strong><em style="color:#94a3b8;font-weight:600;">Kenney</em></div>
+              <small style="color:#cbd5e1;font-size:10px;margin-top:2px;">7 controles · 27 animações</small>
+              <div class="character-actions" style="margin-top:8px;">
+                <button class="character-load" data-load-character="blocky" data-character-preset="blocky" style="width:100%;min-height:36px;background:linear-gradient(135deg,#059669,#047857);color:#ffffff;font-weight:800;border:1px solid #34d399;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:11.5px;box-shadow:0 3px 10px rgba(16,185,129,0.3);text-align:center;line-height:1.3;white-space:normal;word-break:break-word;">Carregar Personagem Blocada</button>
+              </div>
+              <select id="blocky-animation-select" class="character-animation" aria-label="Animação da personagem blocada" disabled style="width:100%;margin-top:6px;background:#090d16;border:1px solid #334155;color:#f8fafc;padding:6px 8px;border-radius:6px;font-size:10.5px;min-height:30px;height:auto;">
+                <option>Carregue para escolher uma animação</option>
+              </select>
+            </div>
+          </article>
+
+          <article class="character-card quaternius-rig-card" style="border:1px solid #0284c7;background:linear-gradient(145deg,#0f172a,#030712);border-radius:12px;padding:12px;margin-top:10px;box-shadow:0 4px 14px rgba(2,132,199,0.2);">
+            <div class="character-portrait" style="height:54px;background:linear-gradient(135deg,#0284c7,#0369a1);color:#ffffff;border-radius:8px;display:grid;place-items:center;font-weight:800;box-shadow:0 0 12px rgba(2,132,199,0.4);">
+              <span>UA</span><i style="display:block;font-size:8px;opacity:0.9;">CC0</i>
+            </div>
+            <div class="character-info">
+              <div><strong style="color:#38bdf8;font-size:13px;">Quaternius Universal Rig</strong><em style="color:#94a3b8;font-weight:600;">Standard RM</em></div>
+              <small style="color:#cbd5e1;display:block;margin:2px 0 6px;font-size:10px;line-height:1.35;">CC0 · FBX texturizado · rig humanoide</small>
+              <div class="character-actions">
+                <button class="character-load" data-load-character="ual1-standard-rm" data-character-preset="ual1-standard-rm" style="width:100%;min-height:36px;background:linear-gradient(135deg,#0284c7,#0369a1);color:#ffffff;font-weight:800;border:1px solid #38bdf8;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:11.5px;box-shadow:0 4px 12px rgba(2,132,199,0.3);text-align:center;line-height:1.3;white-space:normal;word-break:break-word;">Carregar Quaternius Rig</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="section-heading spaced" style="margin-top:20px;"><span>Quaternius & Pacotes ZIP 3D</span><small>Cenários e Personagens CC0</small></div>
+        <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 14px rgba(0,0,0,0.2);">
+          <p style="font-size:11.5px;color:#f8fafc;margin:0;line-height:1.5;font-weight:500;">
+            Importe pacotes <strong>.ZIP</strong> contendo modelos 3D (.FBX, .GLTF, .GLB, .OBJ) e texturas diretamente para o projeto:
+          </p>
+          <button id="import-quaternius-zip-btn" type="button" onclick="document.querySelector('#file-input').click();" style="width:100%;min-height:44px;height:auto;background:linear-gradient(135deg,#0284c7,#0369a1);border:1px solid #38bdf8;color:#ffffff;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;text-align:center;line-height:1.35;box-shadow:0 4px 14px rgba(2,132,199,0.35);word-break:break-word;white-space:normal;">
+            <span style="font-size:16px;">📦</span>
+            <span style="display:inline-block;">Importar Pacote ZIP 3D<br><small style="font-size:9.5px;font-weight:600;opacity:0.95;color:#e0f2fe;display:block;margin-top:1px;">(Cenários e Personagens Quaternius)</small></span>
+          </button>
+
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:2px;">
+            <small style="color:#7dd3fc;font-weight:700;font-size:10.5px;">Pacotes Oficiais Recomendados (Quaternius CC0):</small>
+            <a href="https://quaternius.com/packs/modularcharacteroutfitsfantasy.html" target="_blank" rel="noopener noreferrer" style="font-size:10.5px;color:#38bdf8;text-decoration:none;display:flex;align-items:center;justify-content:space-between;background:#090d16;padding:9px 12px;border-radius:8px;border:1px solid #334155;font-weight:600;transition:all 0.2s ease;">
+              <span>🧙‍♂️ Modular Character Outfits Fantasy</span> <b style="color:#38bdf8;">↗</b>
+            </a>
+            <a href="https://quaternius.com/packs/medievalvillagemegakit.html" target="_blank" rel="noopener noreferrer" style="font-size:10.5px;color:#38bdf8;text-decoration:none;display:flex;align-items:center;justify-content:space-between;background:#090d16;padding:9px 12px;border-radius:8px;border:1px solid #334155;font-weight:600;transition:all 0.2s ease;">
+              <span>🏰 Medieval Village Megakit (Cenário)</span> <b style="color:#38bdf8;">↗</b>
+            </a>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <div id="viewport" class="viewport"></div>
+
+      <nav class="floating-panel viewport-toolbar" aria-label="Ferramentas de transformação">
+        <button class="tool-button active" data-tool="select" title="Seleção (Q)" aria-label="Seleção"><span data-icon="cursor"></span></button>
+        <button class="tool-button" data-tool="translate" title="Mover (W)" aria-label="Mover"><span data-icon="move"></span></button>
+        <button class="tool-button" data-tool="rotate" title="Girar (E)" aria-label="Girar"><span data-icon="rotate"></span></button>
+        <button class="tool-button" data-tool="scale" title="Escalar (R)" aria-label="Escalar"><span data-icon="scale"></span></button>
+        <div class="toolbar-divider"></div>
+        <button id="space-toggle" class="view-chip" title="Alternar Espaço (Local/Global)"><span data-icon="globe"></span><span id="space-label">Global</span></button>
+        <button id="snap-toggle" class="view-chip" title="Ajuste à Grade (Snap)"><span data-icon="grid"></span><span>Snap</span></button>
+      </nav>
+
+      <div class="floating-panel view-toolbar">
+        <button id="camera-reset" class="view-chip" title="Resetar Câmera"><span data-icon="home"></span><span>Reset</span></button>
+        <button id="shading-toggle" class="view-chip" title="Modo de Sombreamento"><span data-icon="sun"></span><span id="shading-label">Sombreado</span></button>
+      </div>
+
+      <div id="selection-pill" class="selection-pill hidden">
+        <i></i><span id="selected-name">Nenhum objeto</span>
+      </div>
+
+      <div id="empty-hint" class="empty-hint">
+        <div class="hint-orbit"><span></span><i></i></div>
+        <strong>Cena 3D Vazia</strong>
+        <small>Adicione formas ou um personagem para começar</small>
+      </div>
+    </main>
+
+    <aside class="right-panel panel">
+      <div class="inspector-header">
+        <div>
+          <small>INSPETOR DE PROPRIEDADES</small>
+          <strong id="inspector-title">Nenhuma seleção</strong>
+        </div>
+      </div>
+
+      <div id="inspector-empty" class="inspector-empty">
+        <span data-icon="cube"></span>
+        <strong>Nenhum objeto selecionado</strong>
+        <small>Selecione um elemento para editar suas propriedades</small>
+      </div>
+
+      <div id="inspector-content" class="inspector-content hidden">
+        <section id="transform-section" class="property-section open">
+          <button class="property-title"><span><i data-icon="move"></i>Transformação</span><b>⌃</b></button>
+          <div class="property-body">
+            <div class="vector-row">
+              <label>Posição</label>
+              <div>
+                <span class="axis-label x">X</span><input id="pos-x" type="number" step="0.1" value="0">
+                <span class="axis-label y">Y</span><input id="pos-y" type="number" step="0.1" value="0">
+                <span class="axis-label z">Z</span><input id="pos-z" type="number" step="0.1" value="0">
+              </div>
+            </div>
+            <div class="vector-row">
+              <label>Rotação (°)</label>
+              <div>
+                <span class="axis-label x">X</span><input id="rot-x" type="number" step="1" value="0">
+                <span class="axis-label y">Y</span><input id="rot-y" type="number" step="1" value="0">
+                <span class="axis-label z">Z</span><input id="rot-z" type="number" step="1" value="0">
+              </div>
+            </div>
+            <div class="vector-row">
+              <label>Escala</label>
+              <div>
+                <span class="axis-label x">X</span><input id="scale-x" type="number" step="0.1" value="1">
+                <span class="axis-label y">Y</span><input id="scale-y" type="number" step="0.1" value="1">
+                <span class="axis-label z">Z</span><input id="scale-z" type="number" step="0.1" value="1">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="geometry-section" class="property-section open">
+          <button class="property-title"><span><i data-icon="cube"></i>Geometria</span><b>⌃</b></button>
+          <div class="property-body geometry-fields" id="geometry-fields"></div>
+        </section>
+
+        <section id="material-section" class="property-section open">
+          <button class="property-title"><span><i data-icon="material"></i>Material</span><b>⌃</b></button>
+          <div class="property-body material-fields">
+            <div class="wide-field"><label>Cor base</label><div class="color-control"><input id="material-color" type="color" value="#7c5cff"><input id="material-hex" type="text" value="#7C5CFF" maxlength="7"></div></div>
+            <div class="range-field"><label>Metálico <output id="metalness-value">0.1</output></label><input id="material-metalness" type="range" min="0" max="1" value="0.1" step="0.05"></div>
+            <div class="range-field"><label>Rugosidade <output id="roughness-value">0.55</output></label><input id="material-roughness" type="range" min="0" max="1" value="0.55" step="0.05"></div>
+          </div>
+        </section>
+
+        <section id="rig-section" class="property-section open hidden">
+          <button class="property-title"><span><i data-icon="person"></i>Assistente de pose</span><b>⌃</b></button>
+          <div class="property-body">
+            <p class="helper-copy">Gire esta articulação e registre a pose. O suavizador cria transições mais naturais entre poses-chave.</p>
+            <button id="mirror-pose-btn" class="secondary-button full">Espelhar pose</button>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <section class="timeline-panel panel">
+      <div class="timeline-head">
+        <div class="timeline-title"><span data-icon="timeline"></span><strong>Linha do tempo</strong><small id="take-label">TAKE 01</small></div>
+        <div class="transport">
+          <button id="first-frame" class="transport-btn" aria-label="Primeiro frame"><span data-icon="first"></span></button>
+          <button id="prev-key" class="transport-btn" aria-label="Keyframe anterior"><span data-icon="prev"></span></button>
+          <button id="play-btn" class="play-btn" aria-label="Reproduzir"><span data-icon="play"></span></button>
+          <button id="next-key" class="transport-btn" aria-label="Próximo keyframe"><span data-icon="next"></span></button>
+          <button id="last-frame" class="transport-btn" aria-label="Último frame"><span data-icon="last"></span></button>
+        </div>
+        <div class="timeline-settings">
+          <label class="auto-key"><input id="auto-key" type="checkbox"><span></span>Auto key</label>
+          <label class="frame-input"><input id="current-frame" type="number" min="0" max="240" value="0"><small>/ 240</small></label>
+          <label class="fps-input"><select id="fps-select"><option>24</option><option selected>30</option><option>60</option></select><small>FPS</small></label>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <div class="track-labels">
+          <div class="track-main"><span class="disclosure">⌄</span><i></i><span id="track-object-name">Objeto selecionado</span></div>
+          <div><span class="track-dot position"></span>Posição</div>
+          <div><span class="track-dot rotation"></span>Rotação</div>
+          <div><span class="track-dot scale"></span>Escala</div>
+        </div>
+        <div id="timeline-ruler" class="timeline-ruler">
+          <div id="ruler-labels" class="ruler-labels"></div>
+          <div class="track-row main-track" data-track="all"></div>
+          <div class="track-row" data-track="position"></div>
+          <div class="track-row" data-track="rotation"></div>
+          <div class="track-row" data-track="scale"></div>
+          <div id="playhead" class="playhead"><span></span></div>
+        </div>
+        <div class="timeline-actions">
+          <button id="add-key-btn" class="key-button"><span data-icon="diamond"></span>Registrar pose <kbd>K</kbd></button>
+          <button id="delete-key-btn" class="subtle-button">Remover key</button>
+          <label class="smooth-toggle"><input id="smooth-motion" type="checkbox" checked><span></span>Movimento suave</label>
+        </div>
+      </div>
+    </section>
+
+    <nav class="mobile-dock" aria-label="Painéis mobile">
+      <button data-mobile-panel="left" class="active"><span data-icon="plus"></span><small>Criar</small></button>
+      <button data-mobile-tool="translate"><span data-icon="move"></span><small>Mover</small></button>
+      <button data-mobile-tool="rotate"><span data-icon="rotate"></span><small>Girar</small></button>
+      <button data-mobile-panel="timeline"><span data-icon="timeline"></span><small>Animar</small></button>
+      <button data-mobile-panel="right"><span data-icon="sliders"></span><small>Editar</small></button>
+    </nav>
+  </div>
+
+  <div id="menu-popover" class="menu-popover hidden"></div>
+  <div id="render-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="render-title">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal aria-label="Fechar">×</button>
+      <div class="modal-icon" data-icon="sparkles"></div>
+      <h2 id="render-title">Exportar sua criação</h2>
+      <p>Escolha o formato final. A cena e a animação permanecem totalmente locais.</p>
+      <div class="render-resolution">
+        <label>Resolução</label>
+        <select id="render-resolution">
+          <option value="1280x720">HD · 1280 × 720</option>
+          <option value="1920x1080" selected>Full HD · 1920 × 1080</option>
+          <option value="3840x2160">4K · 3840 × 2160 (Ultra HD)</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+        <input type="checkbox" id="render-hide-helpers" checked style="accent-color:var(--violet);width:16px;height:16px;cursor:pointer;">
+        <label for="render-hide-helpers" style="font-size:11px;font-weight:600;cursor:pointer;color:var(--text)">Não mostrar controladores e gizmos na renderização</label>
+      </div>
+      <div class="export-grid">
+        <button id="export-image"><span data-icon="image"></span><strong>Imagem PNG</strong><small>Frame atual em alta qualidade</small></button>
+        <button id="export-video-mp4"><span data-icon="video"></span><strong>Animação MP4 (4K / HD)</strong><small>Formato MP4 universal com áudio</small></button>
+        <button id="export-video"><span data-icon="video"></span><strong>Animação WebM</strong><small>Formato WebM com áudio</small></button>
+        <button id="export-glb"><span data-icon="cube"></span><strong>Modelo GLB</strong><small>Geometria, rig e keyframes</small></button>
+        <button id="export-obj"><span data-icon="wireframe"></span><strong>Modelo OBJ</strong><small>Geometria estática universal</small></button>
+      </div>
+      <div id="render-progress" class="render-progress hidden"><div><span></span></div><small>Preparando render...</small></div>
+    </div>
+  </div>
+
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <input id="file-input" type="file" accept=".zip,.blend,.fbx,.glb,.gltf,.obj,application/zip,application/x-zip-compressed,model/gltf-binary,model/gltf+json,application/octet-stream" hidden />
+  <input id="project-input" type="file" accept=".zip,.blend,.fbx,.glb,.gltf,.obj,application/zip,application/x-zip-compressed,application/octet-stream" hidden />
+
+  <!-- MODAL: PERSONALIZAR E MONTAR A INTERFACE INICIAL / CONFIGURAÇÕES -->
+  <div id="custom-ui-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width:680px;text-align:left;">
+      <button class="modal-close" id="close-ui-modal" aria-label="Fechar">×</button>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <span style="font-size:24px;">⚙️</span>
+        <div>
+          <h2 style="margin:0;font-size:18px;color:#38bdf8;">Configurações e Layout da Interface</h2>
+          <small style="color:#94a3b8;">Personalize os painéis, menus, docks e tema visual conforme seu fluxo de trabalho.</small>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="background:#0f172a;padding:12px;border-radius:10px;border:1px solid #1e293b;">
+          <h4 style="margin:0 0 8px;font-size:12px;color:#7dd3fc;">📐 Modo de Layout</h4>
+          <label style="display:block;font-size:11px;margin-bottom:6px;color:#cbd5e1;">
+            <input type="radio" name="layout-mode" value="full" checked /> ⚡ Completo Studio 3D (Todos os painéis)
+          </label>
+          <label style="display:block;font-size:11px;color:#cbd5e1;">
+            <input type="radio" name="layout-mode" value="compact" /> 🎨 Minimalista / Foco no Viewport 3D
+          </label>
+        </div>
+
+        <div style="background:#0f172a;padding:12px;border-radius:10px;border:1px solid #1e293b;">
+          <h4 style="margin:0 0 8px;font-size:12px;color:#7dd3fc;">🎨 Tema & Visual</h4>
+          <label style="display:block;font-size:11px;margin-bottom:6px;color:#cbd5e1;">
+            <input type="radio" name="theme-mode" value="dark" checked /> 🌙 Escuro Studio Luxo (Padrão GPU)
+          </label>
+          <label style="display:block;font-size:11px;margin-bottom:6px;color:#cbd5e1;">
+            <input type="radio" name="theme-mode" value="cad-light" /> ☀️ Técnico CAD Claro (Alta Visibilidade)
+          </label>
+          <label style="display:block;font-size:11px;color:#cbd5e1;">
+            <input type="radio" name="theme-mode" value="high-contrast" /> 👁️ Alto Contraste para Engenharia
+          </label>
+        </div>
+      </div>
+
+      <div style="background:#0f172a;padding:12px;border-radius:10px;border:1px solid #1e293b;margin-bottom:16px;">
+        <h4 style="margin:0 0 8px;font-size:12px;color:#7dd3fc;">🎛️ Visibilidade de Elementos da Tela</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;color:#cbd5e1;">
+          <label><input type="checkbox" id="ui-chk-left" checked /> Painel Criar & Assets (Esquerda)</label>
+          <label><input type="checkbox" id="ui-chk-timeline" checked /> Linha do Tempo / Animação (Inferior)</label>
+          <label><input type="checkbox" id="ui-chk-inspector" checked /> Inspetor de Propriedades (Direita)</label>
+          <label><input type="checkbox" id="ui-chk-cadbar" checked /> Barra Superior de Áreas de Trabalho</label>
+          <label><input type="checkbox" id="ui-chk-floatbar" checked /> Barra Flutuante de Seleção / Cota</label>
+          <label><input type="checkbox" id="ui-chk-mobile" checked /> Dock de Navegação Mobile & Touch</label>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <label style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:6px;">
+          <input type="checkbox" id="ui-auto-show-startup" /> Abrir esta janela de configuração sempre na inicialização
+        </label>
+        <button id="save-ui-config-btn" style="background:#0284c7;color:#fff;font-weight:700;padding:8px 20px;border-radius:8px;border:1px solid #38bdf8;cursor:pointer;">
+          ✅ Aplicar e Salvar Layout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE LOGIN LOCAL, ONBOARDING E CONFORMIDADE LEGAL -->
+  <div id="onboarding-legal-gate" class="modal-backdrop hidden" role="dialog" aria-modal="true" style="z-index:999999;background:rgba(4,7,18,0.96);backdrop-filter:blur(12px);">
+    <div class="modal-card" style="max-width:700px;text-align:left;background:linear-gradient(145deg,#0f172a,#020617);border:1px solid #0284c7;box-shadow:0 25px 70px rgba(0,0,0,0.95);border-radius:16px;padding:26px;color:#f8fafc;position:relative;">
+      <button id="close-onboarding-btn" type="button" aria-label="Fechar" title="Fechar janela" style="position:absolute;right:16px;top:16px;background:#1e293b;border:1px solid #475569;color:#94a3b8;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:grid;place-items:center;transition:all 0.2s ease;">✕</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;border-bottom:1px solid #1e293b;padding-bottom:12px;">
+        <img src="./src/assets/images/regenerated_image_1785379781651.png" style="width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(56,189,248,0.6));" alt="MNAnimat3D Logo" />
+        <div>
+          <h2 style="margin:0;font-size:20px;color:#38bdf8;font-weight:800;">MNAnimat3D Studio — Login Local & Verificação Inicial</h2>
+          <small style="color:#cbd5e1;font-size:11px;font-weight:600;">Acesso Local Seguro (LGPD / ECA Lei 8.069 / Marco Civil / Licença MIT / GDPR)</small>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:#f8fafc;line-height:1.6;margin-bottom:14px;font-weight:500;">
+        Bem-vindo ao <strong>MNAnimat3D Studio</strong>! Para iniciar o aplicativo e liberar todas as ferramentas de modelagem, CAD, esculpir e animação, faça seu <strong>login local</strong>, comprove sua idade e aceite os Termos e Licença.
+      </p>
+
+      <div style="background:#090d16;border:1px solid #334155;border-radius:12px;padding:16px;margin-bottom:16px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">👤 Login / Nome do Usuário:</label>
+            <input type="text" id="onboarding-user-name" value="Micael Souz" placeholder="Digite seu nome ou apelido" style="width:100%;height:38px;background:#1e293b;border:1px solid #475569;color:#ffffff;border-radius:8px;padding:0 10px;font-size:12px;font-weight:600;outline:none;" />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">✉️ E-mail Local (Acesso):</label>
+            <input type="email" id="onboarding-user-email" value="mnanimat@gmail.com" placeholder="seu@email.com" style="width:100%;height:38px;background:#1e293b;border:1px solid #475569;color:#ffffff;border-radius:8px;padding:0 10px;font-size:12px;font-weight:600;outline:none;" />
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🌐 Selecione seu País / Legislação:</label>
+            <select id="onboarding-country-select" style="width:100%;height:38px;background:#1e293b;border:1px solid #475569;color:#ffffff;border-radius:8px;padding:0 10px;font-size:12px;font-weight:600;outline:none;">
+              <option value="BR" selected>🇧🇷 Brasil — LGPD (Lei 13.709/18) & ECA (Lei 8.069/90)</option>
+              <option value="GLOBAL">🌍 Outro País / GDPR Art. 8 & COPPA Compliance</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🎂 Verificação de Idade (Anos):</label>
+            <input type="number" id="onboarding-user-age" min="1" max="120" value="18" placeholder="Digite sua idade" style="width:100%;height:38px;background:#1e293b;border:1px solid #475569;color:#ffffff;border-radius:8px;padding:0 10px;font-size:12px;font-weight:700;outline:none;" />
+          </div>
+        </div>
+
+        <div id="onboarding-age-notice" style="font-size:11px;color:#34d399;line-height:1.5;background:#0f172a;padding:10px 12px;border-radius:8px;border:1px solid #1e293b;font-weight:600;">
+          ✓ Usuário maior de 18 anos. Plena capacidade civil e jurídica para utilizar o MNAnimat3D Studio.
+        </div>
+      </div>
+
+      <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;font-size:12px;color:#f8fafc;font-weight:500;">
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="onboarding-chk-terms" style="margin-top:3px;accent-color:#0284c7;width:18px;height:18px;" />
+          <span>Li e concordo com os <strong>Termos de Uso</strong>, a <strong>Licença MIT (em Português e Inglês)</strong> e a <strong>Política de Privacidade Local-First</strong> (seus arquivos 3D são processados 100% no seu dispositivo).</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="onboarding-chk-age" style="margin-top:3px;accent-color:#0284c7;width:18px;height:18px;" />
+          <span>Declaro que a idade informada é verdadeira e que possuo capacidade civil ou autorização dos responsáveis para utilizar o aplicativo.</span>
+        </label>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <button id="onboarding-btn-open-full-legal" type="button" style="background:#0f172a;color:#38bdf8;border:1px solid #0284c7;border-radius:8px;padding:9px 16px;font-size:11px;font-weight:700;cursor:pointer;">
+          📜 Ler Termos & Licença Completos (PT-BR)
+        </button>
+        <button id="onboarding-btn-accept-and-enter" type="button" disabled style="background:#334155;color:#94a3b8;border:0;border-radius:8px;padding:11px 26px;font-size:13px;font-weight:800;cursor:not-allowed;transition:all 0.2s ease;">
+          🔓 Fazer Login, Aceitar e Acessar o MNAnimat3D Studio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TERMOS DE USO, LEIS APLICÁVEIS E LICENÇA MIT EM PORTUGUÊS E INGLÊS -->
+  <div id="legal-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" style="z-index:999999;background:rgba(4,7,18,0.96);backdrop-filter:blur(12px);">
+    <div class="modal-card" style="max-width:860px;text-align:left;max-height:88vh;overflow-y:auto;background:linear-gradient(145deg,#0f172a,#020617);border:1px solid #34d399;box-shadow:0 30px 80px rgba(0,0,0,0.95);border-radius:18px;padding:26px;color:#f8fafc;">
+      <button class="modal-close" id="close-legal-modal" aria-label="Fechar">×</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;border-bottom:1px solid #334155;padding-bottom:12px;">
+        <span style="font-size:32px;">⚖️</span>
+        <div>
+          <h2 style="margin:0;font-size:20px;color:#34d399;font-weight:800;">Termos de Uso, Leis Aplicáveis & Licença MIT</h2>
+          <small style="color:#cbd5e1;font-size:11px;font-weight:600;">Conformidade Legal no Brasil (LGPD, ECA, Marco Civil) e Internacional (GDPR, CCPA) para Lançamento Web, Windows e Android</small>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1: AUTORIA E DESENVOLVIMENTO -->
+      <div style="background:#020617;border:1px solid #334155;border-radius:12px;padding:14px;margin-bottom:14px;font-size:12px;color:#f8fafc;line-height:1.6;">
+        <h3 style="margin-top:0;color:#6ee7b7;font-size:14px;font-weight:700;">👨‍💻 Autoria e Desenvolvimento</h3>
+        <p style="margin:4px 0;color:#f8fafc;font-size:12px;"><strong>Desenvolvido por Micael Nildo Oliveira Souza com o uso de Inteligência Artificial.</strong></p>
+        <p style="margin:4px 0;color:#e2e8f0;font-size:12px;">Este software é uma aplicação avançada de modelagem, rig, simulação técnica CAD/FEA/CFD e animação 3D projetada para distribuição universal e execução 100% local e segura em navegadores Web, dispositivos móveis Android e computadores Windows.</p>
+      </div>
+
+      <!-- SEÇÃO 2: LICENÇA MIT EM PORTUGUÊS (NOVO) -->
+      <div style="background:#020617;border:1px solid #0284c7;border-radius:12px;padding:14px;margin-bottom:14px;font-size:12px;color:#f8fafc;line-height:1.6;">
+        <h3 style="margin-top:0;color:#38bdf8;font-size:14px;font-weight:700;">📜 Licença MIT (Tradução Oficial em Português)</h3>
+        <pre style="background:#090d16;padding:12px;border-radius:8px;border:1px solid #334155;font-family:monospace;font-size:11px;color:#7dd3fc;white-space:pre-wrap;line-height:1.5;margin-top:8px;">Licença MIT (Tradução em Português)
+
+Direitos Autorais (c) 2026 Micael Nildo Oliveira Souza
+
+É concedida permissão, gratuitamente, a qualquer pessoa que obtenha uma cópia
+deste software e dos arquivos de documentação associados (o "Software"), para lidar
+no Software sem restrições, incluindo, sem limitação, os direitos de usar,
+copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender
+cópias do Software, e permitir que as pessoas a quem o Software é
+fornecido o façam, sujeitas às seguintes condições:
+
+O aviso de direitos autorais acima e este aviso de permissão devem ser incluídos em todas
+as cópias ou partes substanciais do Software.
+
+O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU
+IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO ÀS GARANTIAS DE COMERCIABILIDADE,
+ADEQUAÇÃO A UM DETERMINADO FIM E NÃO VIOLAÇÃO. EM NENHUM CASO OS
+AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRA
+RESPONSABILIDADE, SEJA EM UMA AÇÃO DE CONTRATO, DELITO OU OUTRA FORMA, DECORRENTE DE,
+FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO
+SOFTWARE.</pre>
+      </div>
+
+      <!-- SEÇÃO 3: LICENÇA MIT ORIGINAL EM INGLÊS -->
+      <div style="background:#020617;border:1px solid #334155;border-radius:12px;padding:14px;margin-bottom:14px;font-size:12px;color:#f8fafc;line-height:1.6;">
+        <h3 style="margin-top:0;color:#34d399;font-size:14px;font-weight:700;">📜 MIT License (Original English Version)</h3>
+        <pre style="background:#090d16;padding:12px;border-radius:8px;border:1px solid #334155;font-family:monospace;font-size:11px;color:#a7f3d0;white-space:pre-wrap;line-height:1.5;margin-top:8px;">MIT License
+
+Copyright (c) 2026 Micael Nildo Oliveira Souza
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+      </div>
+
+      <!-- SEÇÃO 4: CONFORMIDADE LEGAL, LGPD, MARCO CIVIL E PROTEÇÃO A MENORES -->
+      <div style="background:#020617;border:1px solid #334155;border-radius:12px;padding:14px;margin-bottom:14px;font-size:12px;color:#f8fafc;line-height:1.6;">
+        <h3 style="margin-top:0;color:#f472b6;font-size:14px;font-weight:700;">🇧🇷 Lei Geral de Proteção de Dados (LGPD) & Marco Civil da Internet</h3>
+        <p style="margin:6px 0;color:#e2e8f0;">1. <strong>Privacidade Local-First:</strong> Todos os seus modelos 3D, texturas, simulações e projetos criados no MNAnimat3D são salvos estritamente no armazenamento local do seu dispositivo (`localStorage` / IndexedDB). Nenhuma geometria ou dado pessoal é transmitido para servidores externos sem o seu consentimento explícito.</p>
+        <p style="margin:6px 0;color:#e2e8f0;">2. <strong>Verificação de Idade & Proteção a Menores:</strong> Em estrito cumprimento ao Estatuto da Criança e do Adolescente (ECA - Lei nº 8.069/1990) e ao Art. 14 da LGPD (Lei nº 13.709/2018), usuários menores de 18 anos devem ter a ciência ou supervisão de seus pais ou responsáveis legais para utilização desta ferramenta.</p>
+        <p style="margin:6px 0;color:#e2e8f0;">3. <strong>Conformidade Internacional:</strong> Compatível com o Regulamento Geral sobre a Proteção de Dados (GDPR) da União Europeia e CCPA da Califórnia.</p>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;">
+        <button id="accept-legal-btn" style="background:#059669;color:#ffffff;font-weight:800;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;font-size:13px;box-shadow:0 4px 15px rgba(5,150,105,0.4);">
+          ✅ Compreendo e Concordo com os Termos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/v3-bootstrap.js?v=100"></script>
+</body>
+</html>
