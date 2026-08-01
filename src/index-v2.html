@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b16" />
+  <title>MNAnimat3D</title>
+  <style>
+    html,body{width:100%;height:100%;margin:0;background:#080a13;color:#f4f5ff;font-family:Segoe UI,sans-serif;display:grid;place-items:center}
+    .boot{display:flex;align-items:center;gap:12px;color:#aeb5ca}.boot i{width:18px;height:18px;border:2px solid #3b4160;border-top-color:#9b7bff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="boot"><i></i><span>Carregando MNAnimat3D v2…</span></div>
+  <script>
+    (async () => {
+      const inSourceFolder = /\/src\/index-v2\.html$/i.test(location.pathname);
+      const candidates = inSourceFolder
+        ? [{ url: '../index.html', base: '../' }]
+        : [{ url: './index-base.html', base: './' }, { url: './index-original.html', base: './' }];
+      let source = null;
+      let baseHref = './';
+      for (const candidate of candidates) {
+        try {
+          const response = await fetch(candidate.url, { cache: 'no-store' });
+          if (!response.ok) continue;
+          source = await response.text();
+          baseHref = candidate.base;
+          break;
+        } catch (_) { }
+      }
+      if (!source) throw new Error('A interface base do MNAnimat3D não foi encontrada.');
+      source = source
+        .replace(/<article class="character-card rain-card">[\s\S]*?<\/article>/i, '')
+        .replace(/<article class="character-card snow-card">[\s\S]*?<\/article>/i, '')
+        .replace('<head>', `<head><base href="${baseHref}">`)
+        .replace('<link rel="stylesheet" href="./styles.css" />', '<link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./src/features-v2.css?v=23" />')
+        .replaceAll('GLB, GLTF ou OBJ', 'FBX, GLB, GLTF ou OBJ')
+        .replace('accept=".glb,.gltf,.obj,model/gltf-binary,model/gltf+json"', 'accept=".fbx,.glb,.gltf,.obj,model/gltf-binary,model/gltf+json,application/octet-stream"')
+        .replace('accept=".glb,.gltf,.obj"', 'accept=".fbx,.glb,.gltf,.obj,application/octet-stream"')
+        .replace('<script type="module" src="./src/app.js?v=13"></script>', '<script type="module" src="./src/v2-bootstrap.js?v=23"></script>');
+      document.open();
+      document.write(source);
+      document.close();
+    })().catch(error => {
+      document.body.innerHTML = `<div style="max-width:520px;padding:24px;text-align:center"><h1>Falha ao abrir o MNAnimat3D v2</h1><p>${String(error.message || error)}</p></div>`;
+    });
+  </script>
+</body>
+</html>
