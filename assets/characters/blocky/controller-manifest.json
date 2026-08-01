@@ -1,0 +1,20 @@
+{
+  "id": "blocky",
+  "name": "Personagem blocada",
+  "source": "https://kenney.nl/assets/blocky-characters",
+  "license": "CC0 1.0 Universal",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "attribution": "Blocky Characters por Kenney (crédito opcional sob CC0)",
+  "original_blend": "original/blocky-character.blend",
+  "file": "blocky-character.glb",
+  "controllers": [
+    { "bone": "root", "label": "Corpo (raiz)", "group": "Corpo", "mode": "move" },
+    { "bone": "torso", "label": "Tronco", "group": "Corpo", "mode": "rotate" },
+    { "bone": "head", "label": "Cabeça", "group": "Corpo", "mode": "rotate" },
+    { "bone": "arm-left", "label": "Braço esquerdo", "group": "Braços", "side": "E", "mode": "rotate" },
+    { "bone": "arm-right", "label": "Braço direito", "group": "Braços", "side": "D", "mode": "rotate" },
+    { "bone": "leg-left", "label": "Perna esquerda", "group": "Pernas", "side": "E", "mode": "rotate" },
+    { "bone": "leg-right", "label": "Perna direita", "group": "Pernas", "side": "D", "mode": "rotate" }
+  ],
+  "limitations": "Personagem original blocada e genérica, sem marcas ou texturas da Mojang. Os sete nós articulados podem receber transformações e keyframes no MNAnimat3D."
+}

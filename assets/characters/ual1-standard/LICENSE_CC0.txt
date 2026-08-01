@@ -1,0 +1,14 @@
+Quaternius Universal Animation Library
+License: Creative Commons Zero v1.0 Universal (CC0 1.0)
+
+Official source:
+https://quaternius.com/packs/universalanimationlibrary.html
+
+The official Quaternius page states that the pack is free for personal,
+educational and commercial projects under CC0. Attribution is not required,
+but the MNAnimat3D interface keeps the following optional credit:
+
+Universal Animation Library by Quaternius — CC0 1.0.
+
+License:
+https://creativecommons.org/publicdomain/zero/1.0/
